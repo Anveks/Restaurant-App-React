@@ -1,0 +1,19 @@
+a {
+  color: whitesmoke;
+  text-decoration: none;
+  margin-left: 5%;
+  white-space: nowrap;
+}
+
+a:active{
+  color: orange;
+}
+
+a:hover{
+  color: orange;
+}
+
+.logo {
+  font-size: 2rem;
+  color: white;
+}
