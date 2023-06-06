@@ -31,14 +31,13 @@ export function cartReducer(currentState = new CartState(), action: CartAction):
           if(newState.cartItems.length > 0){
               const existingItemIndex = newState.cartItems.findIndex((i) => i.itemId === action.payload.itemId);
               const existingItem = newState.cartItems[existingItemIndex];
-              console.log(existingItem);
               
               if(existingItem){
                 const updatedItem = {
                   ...existingItem,
                   amount: existingItem.amount + action.payload.amount
                 }
-                console.log(newState.cartItems);
+                newState.cartItems[existingItemIndex] = updatedItem;
               }
               
           } else {
