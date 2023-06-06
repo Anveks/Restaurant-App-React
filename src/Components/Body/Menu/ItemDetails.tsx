@@ -8,7 +8,7 @@ function ItemDetails(props: any): JSX.Element {
 
     return (
         <div className="ItemDetails">
-            <Card style={{ width: '35rem', marginTop: '2rem' }}>
+            <Card style={{ width: '33rem', marginTop: '2rem' }}>
                 <Card.Img variant="top" src={props.dish.image} />
                 <Card.Body>
                     <Card.Title>{props.dish.name}</Card.Title>

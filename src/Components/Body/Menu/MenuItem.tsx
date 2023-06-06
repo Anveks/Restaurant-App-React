@@ -1,6 +1,19 @@
-import { Card } from "react-bootstrap";
+import { Button, Card } from "react-bootstrap";
+import "./Menu.css";
+import { useRef, useState } from "react";
+import { CartActionType, cartStore } from "../../../Redux/CartState";
 
 function MenuItem(props: any): JSX.Element {
+
+  function handleSubmit(e: any) {
+    e.preventDefault();
+    const enteredAmount = amountRef.current?.value;
+    // console.log(enteredAmount);
+    cartStore.dispatch({ type: CartActionType.addItems, payload: { itemId: props.dish.id, name: props.dish.name, amount: Number(enteredAmount) } });
+    // console.log(cartStore.getState().cartItems);
+  }
+
+  const amountRef = useRef<HTMLInputElement>(null);
 
   return (
     <Card style={{ width: '25rem', marginTop: '2rem' }}>
@@ -12,6 +25,21 @@ function MenuItem(props: any): JSX.Element {
         </Card.Text>
         <p>Price: <b> {props.dish.price} ILS</b></p>
         {props.dish.label && <p>Label: {props.dish.label} </p>}
+
+        <form onSubmit={handleSubmit}>
+          <label className="amount">Amount: </label>
+          <input
+            required
+            type="number"
+            name="amount"
+            min={1}
+            max={5}
+            step={1}
+            ref={amountRef}
+          />
+          <button className="addBtn"> + Add </button>
+        </form>
+
       </Card.Body>
     </Card>
   );

@@ -14,7 +14,7 @@ function Routing(): JSX.Element {
 
       <Route path="/menu" element={<Menu />}></Route>
       <Route path="/about" element={<About />}></Route>
-      <Route path="/contactUs" element={<ContactUs />}></Route>
+      <Route path="/contact" element={<ContactUs />}></Route>
     </Routes>
   );
 }

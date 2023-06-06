@@ -1,10 +1,14 @@
 .scrollable-container {
-  max-height: 1000px;
+  max-height: 450px;
   overflow-y: scroll;
   display: flex;
   align-items: center;
   flex-direction: column;
 }
+
+::-webkit-scrollbar{
+  display: none; 
+ }
 
 .details-container {
   display: flex;
@@ -47,4 +51,24 @@
 
 .scrollable-container::-webkit-scrollbar-thumb {
   background-color: #888;
+}
+
+.amount {
+  font-weight: bold;
+}
+
+.addBtn {
+  border-radius: 5px;
+  background-color: brown;
+  border: none;
+  padding: 1%;
+  width: 25%;
+  font-weight: bold;
+  color: whitesmoke;
+  margin-left: 1%;
+}
+
+.addBtn:hover {
+  background-color: orangered;
+  transition: .1s;
 }
