@@ -9,7 +9,7 @@ function MenuItem(props: any): JSX.Element {
     e.preventDefault();
     const enteredAmount = amountRef.current?.value;
     // console.log(enteredAmount);
-    cartStore.dispatch({ type: CartActionType.addItems, payload: { itemId: props.dish.id, name: props.dish.name, amount: Number(enteredAmount) } });
+    cartStore.dispatch({ type: CartActionType.addItems, payload: { itemId: props.dish.id, name: props.dish.name, amount: Number(enteredAmount), price: Number(props.dish.price) } });
     // console.log(cartStore.getState().cartItems);
   }
 

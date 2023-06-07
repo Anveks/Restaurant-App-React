@@ -3,6 +3,7 @@ import { createStore } from "redux";
 // 1. Product State - The application level state regarding products:
 export class CartState {
   public cartItems: any[] = [];
+  public totalSum: number = 0;
 }
 
 // 2. Products action type - which actions we can perform on our products' global state
@@ -25,26 +26,24 @@ export function cartReducer(currentState = new CartState(), action: CartAction):
    // perform the needed action on the new state 
    switch(action.type){
     case CartActionType.addItems:  
-
-          console.log(action.payload.amount);
           
           if(newState.cartItems.length > 0){
+              // getting the  existing index
               const existingItemIndex = newState.cartItems.findIndex((i) => i.itemId === action.payload.itemId);
+              // getting the existing item
               const existingItem = newState.cartItems[existingItemIndex];
               
               if(existingItem){
-                const updatedItem = {
-                  ...existingItem,
-                  amount: existingItem.amount + action.payload.amount
-                }
-                newState.cartItems[existingItemIndex] = updatedItem;
-              }
+                newState.cartItems[existingItemIndex].amount = newState.cartItems[existingItemIndex].amount + action.payload.amount;
+                newState.totalSum = newState.totalSum + newState.cartItems[existingItemIndex].amount * action.payload.price;
+                console.log(newState.totalSum);
+              }           
               
           } else {
-            newState.cartItems.push(action.payload)
+            newState.cartItems.push(action.payload);
           }
+          console.log(newState.cartItems);
           break;
-  
    }
 
    return newState;
