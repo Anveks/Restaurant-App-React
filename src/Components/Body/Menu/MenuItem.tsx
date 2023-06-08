@@ -8,9 +8,15 @@ function MenuItem(props: any): JSX.Element {
   function handleSubmit(e: any) {
     e.preventDefault();
     const enteredAmount = amountRef.current?.value;
-    // console.log(enteredAmount);
-    cartStore.dispatch({ type: CartActionType.addItems, payload: { itemId: props.dish.id, name: props.dish.name, amount: Number(enteredAmount), price: Number(props.dish.price) } });
-    // console.log(cartStore.getState().cartItems);
+    cartStore.dispatch({
+      type: CartActionType.addItems,
+      payload: {
+        itemId: props.dish.id,
+        name: props.dish.name,
+        amount: Number(enteredAmount),
+        price: Number(props.dish.price)
+      }
+    });
   }
 
   const amountRef = useRef<HTMLInputElement>(null);
@@ -23,11 +29,11 @@ function MenuItem(props: any): JSX.Element {
         <Card.Text>
           {props.dish.description}
         </Card.Text>
-        <p>Price: <b> {props.dish.price} ILS</b></p>
+        <p>Price: <b> {props.dish.price} ₪</b></p>
         {props.dish.label && <p>Label: {props.dish.label} </p>}
 
         <form onSubmit={handleSubmit}>
-          <label className="amount">Amount: </label>
+          <label className="amount"> Amount: </label>
           <input
             required
             type="number"

@@ -1,0 +1,17 @@
+.Cart > div {
+  display: flex;
+  align-items: center;
+	white-space: nowrap;
+  color: whitesmoke;
+  background-color: brown;
+  border-radius: 5px;
+  margin-left: 1rem;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.Cart > div:hover{
+  transform: scale(1.01);
+  background-color: rgb(184, 29, 29);
+  transition: .3s;
+}

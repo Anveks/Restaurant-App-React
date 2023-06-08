@@ -2,6 +2,7 @@ import React from "react";
 import { Navbar, Container, Nav } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 import '../../assets/css/Main.css';
+import Cart from "../Cart/Cart/Cart";
 
 function Navigation(): JSX.Element {
   return (
@@ -15,6 +16,8 @@ function Navigation(): JSX.Element {
             <NavLink to={"/menu"}> Menu </NavLink>
             <NavLink to={"/about"}> About </NavLink>
             <NavLink to={"/contact"}> Contact Us </NavLink>
+
+            <Cart />
           </Nav>
         </Navbar.Collapse>
       </Container>

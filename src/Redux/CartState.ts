@@ -23,27 +23,22 @@ export function cartReducer(currentState = new CartState(), action: CartAction):
 
    const newState = {...currentState};
 
-   // perform the needed action on the new state 
    switch(action.type){
     case CartActionType.addItems:  
-          
-          if(newState.cartItems.length > 0){
-              // getting the  existing index
-              const existingItemIndex = newState.cartItems.findIndex((i) => i.itemId === action.payload.itemId);
-              // getting the existing item
-              const existingItem = newState.cartItems[existingItemIndex];
-              
-              if(existingItem){
-                newState.cartItems[existingItemIndex].amount = newState.cartItems[existingItemIndex].amount + action.payload.amount;
-                newState.totalSum = newState.totalSum + newState.cartItems[existingItemIndex].amount * action.payload.price;
-                console.log(newState.totalSum);
-              }           
-              
-          } else {
-            newState.cartItems.push(action.payload);
-          }
-          console.log(newState.cartItems);
-          break;
+      const exists = newState.cartItems.some((item) => item.itemId === action.payload.itemId);
+      
+        if (!exists) {
+          newState.cartItems.push(action.payload); // id doesnt exist - push
+        } else {
+          const existingItem = newState.cartItems.find((item) => item.itemId === action.payload.itemId);
+          existingItem.amount += action.payload.amount; // if exists - update amount
+        }     
+
+      const amounts = Array.from(newState.cartItems.map((item) => { return item.price * item.amount })); // get all the sums per item
+      
+      newState.totalSum = amounts.reduce((acc, cur) => acc + cur, 0); // multiply   
+      
+    break;
    }
 
    return newState;
