@@ -1,10 +1,16 @@
 import { createStore } from "redux";
+import { handleLocalStorage } from "../Services/LocalStorageService";
 
 // 1. Product State - The application level state regarding products:
 export class CartState {
-  public cartItems: any[] = [];
-  public totalSum: number = 0;
+  public cartItems: any[];
+  public totalSum: number;
   public cartOpen: boolean = false;
+
+  public constructor() {
+    this.cartItems = handleLocalStorage("localCartItems", 'get');
+    this.totalSum = this.cartItems.reduce((acc, item) => acc + item.price * item.amount, 0);
+  }
 }
 
 // 2. Products action type - which actions we can perform on our products' global state
@@ -31,9 +37,11 @@ export function cartReducer(currentState = new CartState(), action: CartAction):
       
         if (!exists) {
           newState.cartItems.push(action.payload); // id doesnt exist - push
+          handleLocalStorage("localCartItems", 'update', newState.cartItems);
         } else {
           const existingItem = newState.cartItems.find((item) => item.itemId === action.payload.itemId);
           existingItem.amount += action.payload.amount; // if exists - update amount
+          handleLocalStorage("localCartItems", 'update', newState.cartItems);
         }     
         
       const amounts = Array.from(newState.cartItems.map((item) => { return item.price * item.amount })); // get all the sums per item
@@ -47,17 +55,29 @@ export function cartReducer(currentState = new CartState(), action: CartAction):
     case CartActionType.handleCartAmount:
       // get the needed item
       const item = newState.cartItems.find((item) => item.itemId === action.payload.cartItem.itemId);
-      console.log(newState.totalSum);
       
       if(action.payload.action === 'add' ){
         item.amount++;
         newState.totalSum += item.price;
+        handleLocalStorage("localCartItems", 'update', newState.cartItems);        
       } else {
         item.amount--;
         newState.totalSum -= item.price;
+        handleLocalStorage("localCartItems", 'update', newState.cartItems);
+        
+        // if amount is zero - remove the item from cartItems arr
+        if (item.amount === 0) {
+          const newCartItems = newState.cartItems.filter((i) => i !== item);         
+          newState.cartItems = newCartItems;
+          handleLocalStorage("localCartItems", 'update', newState.cartItems);
+        }         
       }
 
-      console.log(newState.totalSum);
+      if (newState.cartItems.length === 0) {
+        newState.cartOpen = false;
+        handleLocalStorage("localCartItems", 'remove');
+      }
+      
    }
 
    return newState;

@@ -5,6 +5,7 @@ import { cartStore, CartActionType } from "../../../Redux/CartState";
 
 function CartItem(props: any): JSX.Element {
     const [amount, setAmount] = useState<number>(props.dish.amount);
+
     const cartItem = {
         itemId: props.dish.itemId,
         name: props.dish.name,

@@ -4,12 +4,12 @@ import { CartActionType, cartStore } from "../../../Redux/CartState";
 import "./Cart.css";
 
 function Cart(): JSX.Element {
-    const [totalPrice, setTotalPrice] = useState<number>(0);
+    const [totalPrice, setTotalPrice] = useState<number>(cartStore.getState().totalSum);
 
     useEffect(() => {
         const unsubscribe = cartStore.subscribe(() => {
-            const totalPriceRedux = cartStore.getState().totalSum;
-            setTotalPrice(totalPriceRedux);
+            const reduxTotalSum = cartStore.getState().totalSum;
+            setTotalPrice(reduxTotalSum);
         });
 
         return () => unsubscribe();

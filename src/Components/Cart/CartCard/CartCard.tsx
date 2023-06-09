@@ -12,7 +12,9 @@ function CartCard() {
     useEffect(() => {
         const unsubscribe = cartStore.subscribe(() => {
             const cartState = cartStore.getState().cartOpen;
-            const totalSum = cartStore.getState().totalSum
+            const totalSum = cartStore.getState().totalSum;
+            const dishes = cartStore.getState().cartItems;
+            setDishes(dishes);
             setShow(cartState);
             setTotal(totalSum);
         });
