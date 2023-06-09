@@ -3,11 +3,12 @@ import dishes from '../../../data/dishes';
 import MenuItem from "./MenuItem";
 import ItemDetails from './ItemDetails';
 import './Menu.css'
+import MenuItemModel from '../../../Models/MenuItemModel';
 
 function Menu(): JSX.Element {
 
     let dishDetail;
-    const [selected, setSelected] = useState(null);
+    const [selected, setSelected] = useState<MenuItemModel>(null);
 
     const handleSelected = (dish: any) => setSelected(dish);
 

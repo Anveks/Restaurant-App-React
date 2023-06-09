@@ -1,7 +1,7 @@
-import { Button, Card } from "react-bootstrap";
-import "./Menu.css";
-import { useRef, useState } from "react";
+import { useRef } from "react";
+import { Card } from "react-bootstrap";
 import { CartActionType, cartStore } from "../../../Redux/CartState";
+import "./Menu.css";
 
 function MenuItem(props: any): JSX.Element {
 

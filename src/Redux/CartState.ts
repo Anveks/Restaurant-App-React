@@ -4,12 +4,14 @@ import { createStore } from "redux";
 export class CartState {
   public cartItems: any[] = [];
   public totalSum: number = 0;
+  public cartOpen: boolean = false;
 }
 
 // 2. Products action type - which actions we can perform on our products' global state
 export enum CartActionType {
   addItems,
-  removeItems
+  removeItems,
+  openCart
 }
 
 // 3. Products Action - interface describing an object for performing one action on our global state:
@@ -33,12 +35,15 @@ export function cartReducer(currentState = new CartState(), action: CartAction):
           const existingItem = newState.cartItems.find((item) => item.itemId === action.payload.itemId);
           existingItem.amount += action.payload.amount; // if exists - update amount
         }     
-
+        
       const amounts = Array.from(newState.cartItems.map((item) => { return item.price * item.amount })); // get all the sums per item
-      
       newState.totalSum = amounts.reduce((acc, cur) => acc + cur, 0); // multiply   
-      
-    break;
+      break;
+
+    case CartActionType.openCart:
+      newState.cartOpen = action.payload;
+      console.log(newState.cartOpen);
+      break;
    }
 
    return newState;
