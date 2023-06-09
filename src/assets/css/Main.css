@@ -23,4 +23,46 @@ a:hover{
   align-items: center;
 }
 
+.CartItem {
+  display: flex;
+  justify-content: space-evenly;
+  white-space: nowrap;
+  gap: 5%;
+  align-items: center;
+}
+
+.CartItem > .name {
+  font-weight: bold;
+  color: brown;
+  transform: scale(1.03);
+}
+
+.CartItem > .amount > input {
+  width: 13%;
+  border: none;
+  background-color: whitesmoke;
+  border-radius: 5px;
+  
+}
+
+.CartItem > .amount {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.CartItem > .amount > button {
+  background-color: white;
+  border: transparent;
+  font-weight: bold;
+  transform: scale(1.3);
+  cursor: pointer;
+}
+
+.CartItem > .amount > button:hover{
+  transform: scale(2);
+  transition: .5s;
+  color: orange;
+}
+
 

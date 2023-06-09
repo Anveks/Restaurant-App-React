@@ -2,14 +2,19 @@ import { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { CartActionType, cartStore } from '../../../Redux/CartState';
+import CartItem from '../CartItem/CartItem';
 
 function CartCard() {
     const [show, setShow] = useState(false);
+    const [dishes, setDishes] = useState(cartStore.getState().cartItems);
+    const [total, setTotal] = useState<number>(cartStore.getState().totalSum);
 
     useEffect(() => {
         const unsubscribe = cartStore.subscribe(() => {
             const cartState = cartStore.getState().cartOpen;
+            const totalSum = cartStore.getState().totalSum
             setShow(cartState);
+            setTotal(totalSum);
         });
 
         return () => unsubscribe();
@@ -29,20 +34,29 @@ function CartCard() {
         }
     }
 
+    function handleOrder() {
+        // add order functionality
+    }
+
     return (
         <>
             <Modal show={show} onHide={handleModal}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Modal heading</Modal.Title>
+                    <Modal.Title>Cart:</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>Woohoo, you are reading this text in a modal!</Modal.Body>
+                <Modal.Body>
+
+                    {dishes.map((d) => <CartItem dish={d} key={d.itemId} />)}
+
+                </Modal.Body>
                 <Modal.Footer>
+                    <div className="total">Total: {total} ₪</div>
                     <Button variant="secondary" onClick={handleModal}>
                         Close
                     </Button>
-                    {/* <Button variant="primary" onClick={handleModal}>
-                        Save Changes
-                    </Button> */}
+                    <Button variant="dark" onClick={handleOrder}>
+                        Order
+                    </Button>
                 </Modal.Footer>
             </Modal>
         </>

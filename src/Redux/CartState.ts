@@ -10,8 +10,8 @@ export class CartState {
 // 2. Products action type - which actions we can perform on our products' global state
 export enum CartActionType {
   addItems,
-  removeItems,
-  openCart
+  openCart,
+  handleCartAmount
 }
 
 // 3. Products Action - interface describing an object for performing one action on our global state:
@@ -42,8 +42,22 @@ export function cartReducer(currentState = new CartState(), action: CartAction):
 
     case CartActionType.openCart:
       newState.cartOpen = action.payload;
-      console.log(newState.cartOpen);
       break;
+     
+    case CartActionType.handleCartAmount:
+      // get the needed item
+      const item = newState.cartItems.find((item) => item.itemId === action.payload.cartItem.itemId);
+      console.log(newState.totalSum);
+      
+      if(action.payload.action === 'add' ){
+        item.amount++;
+        newState.totalSum += item.price;
+      } else {
+        item.amount--;
+        newState.totalSum -= item.price;
+      }
+
+      console.log(newState.totalSum);
    }
 
    return newState;
