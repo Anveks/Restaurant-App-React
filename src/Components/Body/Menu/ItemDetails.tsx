@@ -16,8 +16,6 @@ function ItemDetails(props: any): JSX.Element {
                         {props.dish.description}
                     </Card.Text>
                     <p>Price: <b> {props.dish.price} ILS</b></p>
-                    {props.dish.label && <p>Label: {props.dish.label} </p>}
-                    <p>Category: <b> {props.dish.category} </b></p>
 
                     <hr />
 

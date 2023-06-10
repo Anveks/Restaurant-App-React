@@ -30,7 +30,7 @@ function MenuItem(props: any): JSX.Element {
           {props.dish.description}
         </Card.Text>
         <p>Price: <b> {props.dish.price} ₪</b></p>
-        {props.dish.label && <p>Label: {props.dish.label} </p>}
+        {props.dish.label && <p className="label">{props.dish.label} </p>}
 
         <form onSubmit={handleSubmit}>
           <label className="amount"> Amount: </label>

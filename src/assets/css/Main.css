@@ -65,4 +65,19 @@ a:hover{
   color: orange;
 }
 
+.label {
+  background-color: rgb(255, 74, 74);
+  padding: 5px;
+  width: 25%;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  color: whitesmoke;
+  font-weight: bold;
+  position: absolute;
+  top: 3%;
+  left: -5%;
+}
+
+
 

@@ -21,7 +21,7 @@ function Cart(): JSX.Element {
 
     return (
         <div className="Cart" onClick={handleCart}>
-            {totalPrice > 0 && <div><ShoppingCartIcon /> Total Sum: {totalPrice} ₪</div>}
+            {totalPrice > 0 && <div><ShoppingCartIcon /> Total: {totalPrice} ₪</div>}
         </div>
     );
 }

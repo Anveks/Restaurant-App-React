@@ -18,6 +18,27 @@ function Menu(): JSX.Element {
 
     return (
         <div className="container">
+
+            <div className="filters">
+                Select Category:
+
+                <div className="filter">
+                    <label>Main Course</label>
+                    <input type="checkbox" name="meal" />
+                </div>
+
+                <div className="filter">
+                    <label>Appetizer</label>
+                    <input type="checkbox" name="appetizer" />
+                </div>
+
+                <div className="filter">
+                    <label>Dessert</label>
+                    <input type="checkbox" name="dessert" />
+                </div>
+
+            </div>
+
             <div className="row">
                 <div className="col-6 scrollable-container">
                     {dishes.map((item, index) => (
